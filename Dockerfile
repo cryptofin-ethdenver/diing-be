@@ -1,12 +1,13 @@
-FROM node:latest
-WORKDIR /app
-COPY package.json .
-RUN yarn install
+FROM node:18
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm run --script build
+RUN npm run build
 
-EXPOSE 80:80
-# Step 2
-
-CMD node dist/main.js
+CMD [ "node", "dist/main.js" ]
